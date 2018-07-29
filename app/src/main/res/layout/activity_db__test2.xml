@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Db_Test2"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/ET_MyIp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="My ip"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/ET_ConnectedIp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Connected ip"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/ET_Message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Message"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/ET_userRoll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User Roll [1/2]"
+        android:gravity="center"
+        android:textSize="20sp"/>
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Car"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        android:onClick="addMessage"/>
+
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Cars"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        android:onClick="viewMessage"/>
+
+</LinearLayout>

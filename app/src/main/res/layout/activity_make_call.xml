@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MakeCall"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#1696ff">
+
+    <TextView
+        android:id="@+id/tv_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="192."
+        android:textSize="26sp"
+        android:layout_marginBottom="30dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="1:00"
+        android:textSize="26sp"
+        android:background="@drawable/ic_launcher_background"
+        android:layout_margin="20dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="groupMessage"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="groupCall"/>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="100dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="146dp"
+        android:layout_height="146dp"
+        android:src="@drawable/call_button"
+        app:civ_border_width="0dp"
+        app:civ_border_color="#ec07dd"
+        android:onClick="endCall"
+        />
+</LinearLayout>

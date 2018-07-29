@@ -1,0 +1,64 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Tab4">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:background="@drawable/micro24dp_black">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="196dp"
+            android:layout_height="196dp"
+            android:src="@drawable/fahim"
+            app:civ_border_width="6dp"
+            app:civ_border_color="#ec07dd"
+            />
+
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fahim Md Riaz"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="192.168.0.1"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01682-562827"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="riaz.i3216@gmail.com"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
