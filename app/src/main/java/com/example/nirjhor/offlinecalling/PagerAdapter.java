@@ -3,6 +3,7 @@ package com.example.nirjhor.offlinecalling;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
 import android.widget.Switch;
 
 /**
@@ -35,6 +36,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 3:
                 Tab4 tab4 = new Tab4();
                 return tab4;
+            case 4:
+                Tab5 tab5 = new Tab5();
+                return tab5;
             default:
                 return null;
         }

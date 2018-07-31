@@ -20,6 +20,7 @@
         android:layout_marginBottom="30dp"
         />
     <TextView
+        android:id="@+id/tv_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -32,14 +33,17 @@
         />
 
 
-    <Button
+    <TextView
+        android:id="@+id/tv_ring"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="groupMessage"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="groupCall"/>
+        android:onClick="groupMessage"
+        android:gravity="center"
+        android:text="Ringing"
+        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"/>
+
 
 
     <de.hdodenhof.circleimageview.CircleImageView

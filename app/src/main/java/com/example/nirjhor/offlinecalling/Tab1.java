@@ -4,16 +4,31 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+import static android.content.Context.WIFI_SERVICE;
 
 
 /**
@@ -25,6 +40,37 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class Tab1 extends Fragment {
+
+
+
+
+    /*Code for Database*/
+    private DatabaseOperation DatabaseOperation;
+    /*Code for Database*/
+
+    /*server*/
+
+    boolean statusFlag;
+    ServerSocket serverSocket;
+    Socket socket;
+    Thread thread,receiveClass;
+
+    //Send sendMessageClass;
+    /*server*/
+
+
+    /*code for connect*/
+
+
+
+    Socket clientSocket = null;
+    Handler clientHandler,messageHandler;
+    Thread clientThread,threadConnect;
+    Thread clientReceive;
+    //Send sendToServerClass;
+    /*code for connect*/
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,12 +84,28 @@ public class Tab1 extends Fragment {
 
 
     /*    This is my edit Code  */
+
+
+    EditText tv_Others_Ip;
+    Button btn_connect;
+
+    TextView tv_socketIp;
+
+
     public Bundle savedInstanceState;
-    public String name[] = {"Person 1","Person 2","Person 3","Person 4","Person 5","Person 6","Person 7","Person 8"};
-    public String ips[] = {"192.168.4.3","192.168.4.1","192.168.4.6","192.168.4.101","192.168.4.8",
-            "192.168.4.9","192.168.4.5","192.168.4.0"};
+
+    public String ips[] = new String[100];
+
+    public ListView listView;
+    public Tab1.CustomAdapter customAdapter;
+    public View view;
+
+    public TextView tv_MyIp;
+
+    public String sockets_ips[]=new String[200];
     /*    This is my edit Code  */
 
+    public  String myIp;
     public Tab1() {
         // Required empty public constructor
     }
@@ -81,18 +143,101 @@ public class Tab1 extends Fragment {
 
 
 
+        myIp =getMyIp();
+
+
+
 
         /*    This is my edit Code  */
-        View view = inflater.inflate(R.layout.fragment_tab1, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.listView);
+             view = inflater.inflate(R.layout.fragment_tab1, container, false);
 
-        Tab1.CustomAdapter customAdapter = new Tab1.CustomAdapter();
-        listView.setAdapter(customAdapter);
+            tv_MyIp =view.findViewById(R.id.tv_MyIp);
+
+            tv_MyIp.setText(myIp);
+
+            listView = (ListView) view.findViewById(R.id.listView);
+            customAdapter = new Tab1.CustomAdapter(ips);
+            listView.setAdapter(customAdapter);
         /*    This is my edit Code  */
 
         // Inflate the layout for this fragment
+
+
+
+        /*server*/
+        thread = new StartServer();
+        thread.start();
+        /*server*/
+
+
+
+        /*Code for connect*/
+
+        messageHandler = new MessageHandler();
+
+        tv_Others_Ip = view.findViewById(R.id.tv_Others_Ip);
+        btn_connect = view.findViewById(R.id.btn_connect);
+
+        tv_socketIp = view.findViewById(R.id.tv_socketIp);
+
+            btn_connect.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String others_ip = tv_Others_Ip.getText().toString();
+
+                    if (!others_ip.isEmpty()){
+                        threadConnect = new ConnectThread(others_ip);
+                        threadConnect.start();
+                    }
+
+                    Toast.makeText(getContext(), "Onclick on ache baba", Toast.LENGTH_SHORT).show();
+                }
+            });
+        /*Code for connect*/
+
+
+        /*code Database*/
+        DatabaseOperation = new DatabaseOperation(view.getContext());
+        /*code Database*/
+
         return view;
     }
+
+
+    /*code for database*/
+    public void addMessage(String message_send,String connected_Ip) {
+
+        int roll =0;
+        String myIp = this.myIp;
+        String connectedIp = connected_Ip;
+        String message = message_send;
+        roll = 2;
+
+
+        SingleUserMessage singleUserMessage = new SingleUserMessage(myIp,connectedIp,message,roll);
+        boolean status = DatabaseOperation.addMessage(singleUserMessage);
+
+        if (status)
+        {
+            //Toast.makeText(getContext(), "Successfull", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            //Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    /*code for database*/
+
+
+    /*getip*/
+    public String getMyIp(){
+        WifiManager wm = (WifiManager) getContext().getApplicationContext().getSystemService(WIFI_SERVICE);
+        String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+
+        return ip;
+    }
+    /*getip*/
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -136,9 +281,15 @@ public class Tab1 extends Fragment {
     /*    This is my edit Code  */
     class CustomAdapter extends BaseAdapter {
 
+        String upadtedIps[];
+
+        public CustomAdapter(String[] upadtedIps) {
+            this.upadtedIps = upadtedIps;
+        }
+
         @Override
         public int getCount() {
-            return name.length;
+            return ips.length;
         }
 
         @Override
@@ -153,7 +304,7 @@ public class Tab1 extends Fragment {
 
         @SuppressLint("RestrictedApi")
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater(savedInstanceState).inflate(R.layout.customlayout,null);
 
             ImageView img_Call,img_Message;
@@ -163,28 +314,51 @@ public class Tab1 extends Fragment {
 
             TextView tv_ip,tv_number;
 
+            //final  int list_position = position;
+
+
+
             tv_ip = (TextView) convertView.findViewById(R.id.tv_ip);
 
-            tv_ip.setText(ips[position]);
+            tv_ip.setText(upadtedIps[position]);
 
             final String ip = tv_ip.getText().toString();
+
 
             img_Call.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(), "Call : "+ip, Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getContext(),MakeCall.class);
-                    i.putExtra("ip",ip);
-                    startActivity(i);
+                    if (ip.isEmpty())
+                    {
+                        Toast.makeText(getContext(), "empty", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else {
+                        Toast.makeText(getContext(), "Call : "+ip, Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getContext(),MakeCall.class);
+                        i.putExtra("ip",ip);
+                        startActivity(i);
+                    }
+
                 }
             });
             img_Message.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(), "Message : "+ip, Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getContext(),MessageSend.class);
-                    i.putExtra("ip",ip);
-                    startActivity(i);
+                    if (ip.isEmpty())
+                    {
+                        Toast.makeText(getContext(), "empty", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else {
+                        Toast.makeText(getContext(), "Message : "+ip, Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getContext(),MessageSend.class);
+                        i.putExtra("ip",ip);
+                        i.putExtra("myIp",myIp);
+                        i.putExtra("position",position);
+                        startActivity(i);
+                    }
+
                 }
             });
 
@@ -193,4 +367,176 @@ public class Tab1 extends Fragment {
         }
     }
     /*    This is my edit Code  */
+
+    /*Code for my connection*/
+    public class ConnectThread extends Thread{
+
+        String ip ;
+
+
+        public ConnectThread(String ipServer) {
+            this.ip = ipServer;
+        }
+
+        Message message = new Message();
+        @Override
+        public void run() {
+
+            try {
+                clientSocket = new Socket(ip,8101);
+
+
+
+
+                message.what = 2;
+                message.obj = "SocketIp: "+clientSocket.getInetAddress().getHostAddress();
+                messageHandler.sendMessage(message);
+
+
+                SingleTon_for_socket.getInstance().sockets_connect.add(clientSocket);
+
+                //new Receive(clientSocket).start();
+                //new Receive(clientSocket);
+                new Thread(new Receive(clientSocket)).start();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+    /*Code for my connection*/
+
+    //for message showing and error showing
+    public class MessageHandler extends Handler{
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what == 1){
+                tv_socketIp.setText((String)msg.obj);
+                updateList();
+            }
+            if(msg.what == 2){
+                tv_socketIp.setText((String)msg.obj);
+                Toast.makeText(getContext(), "data : "+msg.obj, Toast.LENGTH_SHORT).show();
+                updateList();
+            }
+            if(msg.what == 3){
+                String dataArray[] = (String[]) msg.obj;
+
+                addMessage(dataArray[0],dataArray[1]);
+
+
+                //MessageSend.getInstance().updateMessage();
+
+                //updateList();
+            }
+
+
+            super.handleMessage(msg);
+        }
+
+
+        public void updateList(){
+            /*make socket array ip */
+            int lenght = SingleTon_for_socket.getInstance().sockets_connect.size();
+            for (int i=0;i<lenght;i++){
+                sockets_ips[i] = SingleTon_for_socket.getInstance().sockets_connect.get(i).getInetAddress().getHostAddress();
+                Toast.makeText(getContext(), "ip : "+sockets_ips[i], Toast.LENGTH_SHORT).show();
+            }
+
+
+
+            listView = (ListView) view.findViewById(R.id.listView);
+            customAdapter = new Tab1.CustomAdapter(sockets_ips);
+            listView.setAdapter(customAdapter);
+
+
+            /*make socket array ip */
+        }
+    }
+
+
+    /*server*/
+    class StartServer extends Thread{
+
+
+        Message message = new Message();
+        public void run() {
+            socket = null;
+            try {
+                serverSocket = new ServerSocket(8101);
+
+                while (true){
+                    socket = serverSocket.accept();
+
+
+                    SingleTon_for_socket.getInstance().sockets_connect.add(socket);
+
+                    //new Receive(socket).start();
+                    new Thread(new Receive(socket)).start();
+
+                    message.what = 2;
+                    message.obj = "connect ";
+                    messageHandler.sendMessage(message);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    /*server*/
+
+
+    public class Receive implements Runnable{
+
+        Message message = new Message();
+
+        String connected_ip = "";
+
+        Socket receiveFromclientSocket;
+        DataInputStream dataInputStream;
+        public Receive(Socket socket){
+
+
+
+            this.receiveFromclientSocket = socket;
+            try {
+                dataInputStream = new DataInputStream(receiveFromclientSocket.getInputStream());
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
+
+            connected_ip = receiveFromclientSocket.getInetAddress().getHostAddress();
+
+        }
+
+
+
+        @Override
+        public void run() {
+
+            while (true){
+
+                try {
+                    String data = dataInputStream.readUTF();
+
+                    String dataArray[] = {data,connected_ip};
+
+                    if (!data.isEmpty()){
+                        message.what = 3;
+                        message.obj = dataArray;
+                        messageHandler.sendMessage(message);
+
+                        //addMessage(data,connected_ip);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
+
 }

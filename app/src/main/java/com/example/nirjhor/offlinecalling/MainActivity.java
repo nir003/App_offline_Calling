@@ -8,12 +8,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.*;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements
         Tab1.OnFragmentInteractionListener,
         Tab2.OnFragmentInteractionListener,
         Tab3.OnFragmentInteractionListener,
-        Tab4.OnFragmentInteractionListener {
+        Tab4.OnFragmentInteractionListener,
+        Tab5.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,12 @@ public class MainActivity extends AppCompatActivity implements
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_group_white_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.history));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_person_white_24dp));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_person_white_24dp));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+
+
+
 
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -40,6 +47,13 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+
+
+
+
+                Toast.makeText(MainActivity.this, "tab: "+tab.getPosition(), Toast.LENGTH_SHORT).show();
+
+
 
             }
 

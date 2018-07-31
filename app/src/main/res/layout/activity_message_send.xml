@@ -9,27 +9,45 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <TextView
-        android:id="@+id/tv_connected_ip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        />
-
-
-    <ScrollView
-
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="80"
-        >
+        android:layout_weight="1"
+        android:orientation="horizontal">
         <TextView
-            android:id="@+id/messageList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:id="@+id/tv_connected_ip"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            />
+        <ImageButton
+            android:id="@+id/btn_refresh"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Refresh"
+            android:src="@drawable/ic_refresh_white_24dp"
+            android:background="@drawable/message_circle2"
+            android:textSize="16sp"
+            android:onClick="update"
+            />
 
-    </ScrollView
-        >
+    </LinearLayout>
+
+
+
+
+    <ListView
+        android:id="@+id/messagelist"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:layout_marginBottom="10dp"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll">
+
+    </ListView>
 
 
 
@@ -38,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:weightSum="10"
-        android:layout_weight="12"
+        android:layout_weight="1"
         android:background="#fff">
         <EditText
             android:id="@+id/writeText"
@@ -55,7 +73,8 @@
             android:layout_weight="2"
             android:src="@drawable/ic_send_black_24dp"
             android:background="#fff"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:onClick="send"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -25,7 +25,7 @@
             android:layout_marginLeft="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Offline Calling"
+            android:text="LAC"
             android:textSize="20sp"
             android:textColor="#fff"
             android:textStyle="bold"/>

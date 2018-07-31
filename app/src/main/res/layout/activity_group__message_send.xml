@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Group_MessageSend"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_connected_ip"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            />
+        <ImageButton
+            android:id="@+id/btn_refresh"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Refresh"
+            android:src="@drawable/ic_refresh_white_24dp"
+            android:background="@drawable/message_circle2"
+            android:textSize="16sp"
+            android:onClick="update"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#fff">
+        <EditText
+            android:id="@+id/tv_Others_Ip"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:layout_height="match_parent"
+            android:hint="Enter ip to connect"
+            android:textColorHint="#ae1fb6"
+            android:inputType="text"
+            android:textSize="15sp"
+            />
+        <Button
+            android:id="@+id/btn_connect"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:background="#0a6be9"
+            android:layout_height="match_parent"
+            android:text="Connect"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:onClick="group_Connet"/>
+    </LinearLayout>
+
+
+
+
+    <ListView
+        android:id="@+id/messagelist"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:layout_marginBottom="10dp"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll">
+
+    </ListView>
+
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:weightSum="10"
+        android:layout_weight="1"
+        android:background="#fff">
+        <EditText
+            android:id="@+id/writeText"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:layout_height="match_parent"
+            android:hint="Type a message"
+            android:inputType="textMultiLine|text"
+            android:textSize="15sp"
+            />
+        <ImageButton
+            android:id="@+id/buttonSend"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:src="@drawable/ic_send_black_24dp"
+            android:background="#fff"
+            android:layout_height="match_parent"
+            android:onClick="send"/>
+    </LinearLayout>
+
+</LinearLayout>

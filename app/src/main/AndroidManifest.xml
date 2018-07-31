@@ -2,6 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nirjhor.offlinecalling">
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION"
+        android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.wifi.direct"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,21 +25,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MakeCall" />
-        <activity android:name=".MessageSend" />
-        <activity android:name=".GroupMessage" />
-        <activity android:name=".GroupCall" />
-        <activity android:name=".DbTest"/>
-        <activity android:name=".CarListActivity" />
-        <activity android:name=".MessageListActivity" />
-        <activity android:name=".Db_Test2">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MakeCall" />
+        <activity android:name=".MessageSend" />
+        <activity android:name=".GroupMessage" />
+        <activity android:name=".GroupCall" />
+        <activity android:name=".DbTest" />
+        <activity android:name=".CarListActivity" />
+        <activity android:name=".MessageListActivity" />
+        <activity android:name=".Db_Test2" />
+        <activity android:name=".IpTest"></activity>
+        <activity android:name=".Ip_lister"></activity>
+        <activity android:name=".Group_MessageSend"></activity>
     </application>
 
 </manifest>

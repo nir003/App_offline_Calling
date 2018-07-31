@@ -81,4 +81,35 @@ public class DatabaseOperation {
         this.close();
         return singleUserMessages;
     }
+
+
+    public ArrayList<SingleUserMessage> getSingleUserMessage(String connecTed_Ip)
+    {
+        ArrayList<SingleUserMessage> singleUserMessages = new ArrayList<>();
+        this.open();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+DatabaseHelper.DB_TableName+" WHERE "+DatabaseHelper.TBL_col_Connected_Ip+" = ? ", new String[] {connecTed_Ip});
+        cursor.moveToFirst();
+        if(cursor != null && cursor.getCount() > 0)
+        {
+            for (int i =0; i< cursor.getCount(); i++)   //while(cursor.close())
+            {
+                int id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.TBL_col_id));
+
+                String myIp = cursor.getString(cursor.getColumnIndex(DatabaseHelper.TBL_col_My_Ip));
+                String connectedIp = cursor.getString(cursor.getColumnIndex(DatabaseHelper.TBL_col_Connected_Ip));
+                String message = cursor.getString(cursor.getColumnIndex(DatabaseHelper.TBL_col_Message));
+                int roll = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.TBL_col_Role));
+
+                userMessage = new SingleUserMessage(id,myIp,connectedIp,message,roll);
+                singleUserMessages.add(userMessage);
+
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+
+        this.close();
+        return singleUserMessages;
+    }
 }

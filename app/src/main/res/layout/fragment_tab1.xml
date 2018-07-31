@@ -1,18 +1,100 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Tab1">
+    tools:context=".Tab1"
+    android:orientation="vertical"
+    android:layout_marginTop="30dp"
 
-    <!-- TODO: Update blank fragment layout -->
+    >
 
-    <ListView
-        android:id="@+id/listView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@color/colorPrimary"
-        android:dividerHeight="2dp"
-        android:listSelector="#e82c6fff"></ListView>
+        android:layout_height="match_parent">
+        <!-- TODO: Update blank fragment layout -->
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="My Ip: "
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:gravity="right"/>
+                <TextView
+                    android:id="@+id/tv_MyIp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="192.168.42.102"
+                    android:textSize="16sp"
+                    android:textColor="#332f2f" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_socketIp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp"
+                android:textColor="#332f2f"
+                android:padding="10dp"/>
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:divider="@color/colorPrimary"
+                android:dividerHeight="2dp"
+                android:listSelector="#e82c6fff"
+
+                android:padding="10dp"/>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+
+                android:background="#fff">
+                <EditText
+                    android:id="@+id/tv_Others_Ip"
+                    android:layout_width="0dp"
+                    android:layout_weight="8"
+                    android:layout_height="match_parent"
+                    android:hint="Enter ip to connect"
+                    android:textColorHint="#ae1fb6"
+                    android:inputType="text"
+                    android:textSize="15sp"
+                    />
+                <Button
+                    android:id="@+id/btn_connect"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:background="#0a6be9"
+                    android:layout_height="match_parent"
+                    android:text="Connect"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"
+                    android:layout_margin="10dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

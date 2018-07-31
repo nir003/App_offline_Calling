@@ -32,6 +32,7 @@ public class Db_Test2 extends AppCompatActivity {
     }
 
     public void addMessage(View view) {
+
         int roll =0;
         String myIp = ET_MyIp.getText().toString();
         String connectedIp = ET_ConnectedIp.getText().toString();
