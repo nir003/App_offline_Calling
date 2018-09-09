@@ -48,12 +48,7 @@ public class MainActivity extends AppCompatActivity implements
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
 
-
-
-
                 Toast.makeText(MainActivity.this, "tab: "+tab.getPosition(), Toast.LENGTH_SHORT).show();
-
-
 
             }
 

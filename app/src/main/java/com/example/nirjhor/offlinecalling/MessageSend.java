@@ -20,6 +20,7 @@ public class MessageSend extends AppCompatActivity {
 
     TextView tv_connected_ip;
 
+
     int list_position = 0;
     public Socket socket;
 
@@ -128,6 +129,9 @@ public class MessageSend extends AppCompatActivity {
                 }
             };
             new Thread(runnable).start();
+
+
+
 
 
             addMessage(message);

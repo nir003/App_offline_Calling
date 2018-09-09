@@ -44,6 +44,7 @@ public class Tab1 extends Fragment {
 
 
 
+
     /*Code for Database*/
     private DatabaseOperation DatabaseOperation;
     /*Code for Database*/
@@ -167,6 +168,7 @@ public class Tab1 extends Fragment {
         /*server*/
         thread = new StartServer();
         thread.start();
+
         /*server*/
 
 
@@ -395,9 +397,11 @@ public class Tab1 extends Fragment {
 
                 SingleTon_for_socket.getInstance().sockets_connect.add(clientSocket);
 
+                //receiveClass = new Receive(socket);
+                //receiveClass.start();
                 //new Receive(clientSocket).start();
                 //new Receive(clientSocket);
-                new Thread(new Receive(clientSocket)).start();
+               new Thread(new Receive(clientSocket)).start();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -472,8 +476,11 @@ public class Tab1 extends Fragment {
 
                     SingleTon_for_socket.getInstance().sockets_connect.add(socket);
 
+                    receiveClass = new Receive(socket);
+                    receiveClass.start();
+
                     //new Receive(socket).start();
-                    new Thread(new Receive(socket)).start();
+                    //new Thread(new Receive(socket)).start();
 
                     message.what = 2;
                     message.obj = "connect ";
@@ -488,9 +495,9 @@ public class Tab1 extends Fragment {
     /*server*/
 
 
-    public class Receive implements Runnable{
+    public class Receive extends Thread{
 
-        Message message = new Message();
+
 
         String connected_ip = "";
 
@@ -524,9 +531,12 @@ public class Tab1 extends Fragment {
                     String dataArray[] = {data,connected_ip};
 
                     if (!data.isEmpty()){
+                        Message message = new Message();
                         message.what = 3;
                         message.obj = dataArray;
                         messageHandler.sendMessage(message);
+
+                        //message = null;
 
                         //addMessage(data,connected_ip);
                     }
