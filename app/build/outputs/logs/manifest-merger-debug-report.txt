@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-48:12
+ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-49:12
 MERGED from [com.android.support:design:28.0.0-beta01] C:\Users\Nirjhor\.gradle\caches\transforms-1\files-1.1\design-28.0.0-beta01.aar\1a28c587ff14664e9d3336b52292d3d4\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:28.0.0-beta01] C:\Users\Nirjhor\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-beta01.aar\972a51dcf5d995d13bc63cd62e03d1d9\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\Nirjhor\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\2543e38d2070ad4f104447eae2d0a9d4\AndroidManifest.xml:2:1-11:12
@@ -37,20 +37,20 @@ MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Nirjhor\.gradle\ca
 MERGED from [com.android.support:interpolator:28.0.0-beta01] C:\Users\Nirjhor\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-beta01.aar\220b9aaa2611486c1b2781df35edc12a\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Nirjhor\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\ec7911f6d6b6f0e5d0a6d4e35649b14d\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Nirjhor\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7af66bee9baceb54ad8f8ba560519c1a\AndroidManifest.xml:17:1-22:12
-INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-48:12
+INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-49:12
 	package
 		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:3:5-49
 		INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml
 		INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml
-		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-48:12
+		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-49:12
 		INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml
-		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-48:12
+		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:1-49:12
 		INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:2:11-69
@@ -95,7 +95,7 @@ ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:1
 	android:name
 		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:19:22-78
 application
-ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:21:5-46:19
+ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:21:5-47:19
 MERGED from [com.android.support:design:28.0.0-beta01] C:\Users\Nirjhor\.gradle\caches\transforms-1\files-1.1\design-28.0.0-beta01.aar\1a28c587ff14664e9d3336b52292d3d4\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0-beta01] C:\Users\Nirjhor\.gradle\caches\transforms-1\files-1.1\design-28.0.0-beta01.aar\1a28c587ff14664e9d3336b52292d3d4\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.2] C:\Users\Nirjhor\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\2543e38d2070ad4f104447eae2d0a9d4\AndroidManifest.xml:9:5-20
@@ -167,17 +167,21 @@ ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:4
 	android:name
 		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:42:19-43
 activity#com.example.nirjhor.offlinecalling.IpTest
-ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:43:9-53
+ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:43:9-44
 	android:name
 		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:43:19-41
 activity#com.example.nirjhor.offlinecalling.Ip_lister
-ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:44:9-56
+ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:44:9-47
 	android:name
 		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:44:19-44
 activity#com.example.nirjhor.offlinecalling.Group_MessageSend
-ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:45:9-64
+ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:45:9-55
 	android:name
 		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:45:19-52
+activity#com.example.nirjhor.offlinecalling.GroupConnection
+ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:46:9-62
+	android:name
+		ADDED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml:46:19-50
 uses-sdk
 INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from E:\AllApps\fahimApp\OfflineCalling\app\src\main\AndroidManifest.xml

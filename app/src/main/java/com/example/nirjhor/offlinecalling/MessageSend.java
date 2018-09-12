@@ -20,6 +20,8 @@ public class MessageSend extends AppCompatActivity {
 
     TextView tv_connected_ip;
 
+    public static MessageSend instance;
+
 
     int list_position = 0;
     public Socket socket;
@@ -55,7 +57,7 @@ public class MessageSend extends AppCompatActivity {
 
 
 
-        tv_connected_ip.setText("Connected ip:" + connected_Ip + "    position: " + list_position);
+       // tv_connected_ip.setText("Connected ip:" + connected_Ip + "    position: " + list_position);
 
         socket = SingleTon_for_socket.getInstance().sockets_connect.get(list_position);
 
@@ -79,6 +81,14 @@ public class MessageSend extends AppCompatActivity {
 
 
     }
+
+
+   /* public static MessageSend getInstance(){
+        if (instance ==null){
+            instance = new MessageSend();
+        }
+        return instance;
+    }*/
 
     public void addMessage(String message_send) {
 

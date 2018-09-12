@@ -3,12 +3,27 @@ package com.example.nirjhor.offlinecalling;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.ArrayList;
+
+import static android.content.Context.WIFI_SERVICE;
 
 
 /**
@@ -29,9 +44,35 @@ public class Tab2 extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    public View view;
+    ImageButton btn_send, btn_update;
     private OnFragmentInteractionListener mListener;
 
     public LinearLayout lin_group;
+
+    /*Copy*/
+    int list_position = 0;
+    public Socket socket;
+
+    public DataOutputStream dataOutputStream;
+
+    public EditText writeText;
+
+    /*Code for Database*/
+    private DatabaseOperation DatabaseOperation;
+    /*Code for Database*/
+
+    /*code for message list*/
+    private ListView messageListView;
+    private messageAdapter messageAdapter;
+    private ArrayList<SingleUserMessage> messages;
+    /*code for message list*/
+
+    public String myIp = "faka";
+    public String connected_Ip = "faka";
+    /*Copy*/
+
+    public TextView tv_connected_ip;
 
     public Tab2() {
         // Required empty public constructor
@@ -68,18 +109,195 @@ public class Tab2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_tab2, container, false);
-        lin_group = view.findViewById(R.id.lin_group);
+         view = inflater.inflate(R.layout.fragment_tab2, container, false);
 
-        lin_group.setOnClickListener(new View.OnClickListener() {
+        writeText = view.findViewById(R.id.writeText);
+
+         btn_send = view.findViewById(R.id.btn_send);
+         btn_update =  view.findViewById(R.id.btn_refresh);
+
+        tv_connected_ip = view.findViewById(R.id.tv_connected_ip);
+
+        tv_connected_ip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(),Group_MessageSend.class));
+
             }
         });
+
+        myIp = getMyIp();
+
+
+        /*code Database*/
+        DatabaseOperation = new DatabaseOperation(getContext());
+        /*code Database*/
+        /*Code for Message List*/
+        updateMessage();
+        /*Code for Message List*/
+
+        btn_send.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 Toast.makeText(getContext(), "Send", Toast.LENGTH_SHORT).show();
+
+                 send();
+
+
+             }
+         });
+        btn_update.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 updateMessage();
+             }
+         });
+
         // Inflate the layout for this fragment
         return view;
     }
+
+    /*getip*/
+    public String getMyIp(){
+        WifiManager wm = (WifiManager) getContext().getApplicationContext().getSystemService(WIFI_SERVICE);
+        String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+
+        return ip;
+    }
+    /*getip*/
+
+    public void addMessage(String message_send) {
+
+        int roll =0;
+        String myIp = this.myIp;
+        String connectedIp = connected_Ip;
+        String message = message_send;
+        roll = 1;
+        String isGroup = "1";
+
+
+        SingleUserMessage singleUserMessage = new SingleUserMessage(myIp,connectedIp,message,roll,isGroup);
+
+        boolean status = DatabaseOperation.addMessage_Group(singleUserMessage);
+
+        if (status)
+        {
+            Toast.makeText(getContext(), "Successfull", Toast.LENGTH_SHORT).show();
+            writeText.setText("");
+        }
+        else
+        {
+            Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void send() {
+
+        final String message = writeText.getText().toString();
+        Toast.makeText(getContext(), "ip: " + message, Toast.LENGTH_SHORT).show();
+
+
+        if (!message.isEmpty()) {
+
+            for (int i=0;i< SingleTon_for_socket.getInstance().sockets_connect_GROUP.size();i++){
+
+                socket = SingleTon_for_socket.getInstance().sockets_connect_GROUP.get(i);
+
+                //Toast.makeText(getContext(), ""+socket.getInetAddress().getHostAddress(), Toast.LENGTH_SHORT).show();
+
+                try {
+                    dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+
+                                dataOutputStream.writeUTF(message);
+
+
+                            } catch (IOException e) {
+
+                                e.printStackTrace();
+
+                            }
+                        }
+                    };
+                    new Thread(runnable).start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
+
+            addMessage(message);
+            updateMessage();
+
+        }
+     /*   else {
+            writeText.setError(getString(R.string.Empty_field_msg));
+        }*/
+
+
+
+    }
+
+    public  void updateMessage()
+    {
+        /*Code for message List*/
+        messageListView =  view.findViewById(R.id.messagelist);
+        DatabaseOperation = new DatabaseOperation(getContext());
+        messages = DatabaseOperation.getGroupUserMessage("1");
+        messageAdapter = new messageAdapter(getContext(),messages);
+        messageListView.setAdapter(messageAdapter);
+        /*Code for message List*/
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

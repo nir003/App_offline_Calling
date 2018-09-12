@@ -234,7 +234,7 @@ public class Group_MessageSend extends AppCompatActivity {
             this.ip = ipServer;
         }
 
-        Message message = new Message();
+        //Message message = new Message();
         @Override
         public void run() {
 
@@ -265,7 +265,7 @@ public class Group_MessageSend extends AppCompatActivity {
 
     public class Receive implements Runnable{
 
-        Message message = new Message();
+
 
         String connected_ip = "";
 
@@ -299,6 +299,7 @@ public class Group_MessageSend extends AppCompatActivity {
                     String dataArray[] = {data,connected_ip};
 
                     if (!data.isEmpty()){
+                        Message message = new Message();
                         message.what = 3;
                         message.obj = dataArray;
                         messageHandler.sendMessage(message);

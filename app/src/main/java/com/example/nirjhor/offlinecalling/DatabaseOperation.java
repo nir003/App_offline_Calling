@@ -52,6 +52,34 @@ public class DatabaseOperation {
             return false;
     }
 
+
+    public boolean addMessage_Group(SingleUserMessage singleUserMessage)
+    {
+        this.open();
+
+        ContentValues values = new ContentValues();
+
+        values.put(DatabaseHelper.TBL_col_My_Ip3,singleUserMessage.getMyIp());
+        values.put(DatabaseHelper.TBL_col_Connected_Ip3,singleUserMessage.getConnectedIp());
+        values.put(DatabaseHelper.TBL_col_Message3,singleUserMessage.getMessage());
+        values.put(DatabaseHelper.TBL_col_Role3,singleUserMessage.getUserRoll());
+        values.put(DatabaseHelper.TBL_col_group,singleUserMessage.getIsGroup());
+
+        // id = 1,2,3 etc if successfull ... id = -1 if not success
+        long id = sqLiteDatabase.insert(DatabaseHelper.DB_TableName,null,values);
+
+        Log.e("Success/Not", "addCar:insert id = "+id+"");   //it shows the id in logcat
+
+        this.close();
+
+        if(id > 0)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
     public ArrayList<SingleUserMessage> getAllMessage()
     {
         ArrayList<SingleUserMessage> singleUserMessages = new ArrayList<>();
@@ -83,6 +111,7 @@ public class DatabaseOperation {
     }
 
 
+
     public ArrayList<SingleUserMessage> getSingleUserMessage(String connecTed_Ip)
     {
         ArrayList<SingleUserMessage> singleUserMessages = new ArrayList<>();
@@ -100,6 +129,37 @@ public class DatabaseOperation {
                 String connectedIp = cursor.getString(cursor.getColumnIndex(DatabaseHelper.TBL_col_Connected_Ip));
                 String message = cursor.getString(cursor.getColumnIndex(DatabaseHelper.TBL_col_Message));
                 int roll = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.TBL_col_Role));
+
+                userMessage = new SingleUserMessage(id,myIp,connectedIp,message,roll);
+                singleUserMessages.add(userMessage);
+
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+
+        this.close();
+        return singleUserMessages;
+    }
+
+
+    public ArrayList<SingleUserMessage> getGroupUserMessage(String isGroup)
+    {
+        ArrayList<SingleUserMessage> singleUserMessages = new ArrayList<>();
+        this.open();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+DatabaseHelper.DB_TableName+" WHERE "+DatabaseHelper.TBL_col_group+" = ? ", new String[] {isGroup});
+        cursor.moveToFirst();
+        if(cursor != null && cursor.getCount() > 0)
+        {
+            for (int i =0; i< cursor.getCount(); i++)   //while(cursor.close())
+            {
+                int id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.TBL_col_id3));
+
+                String myIp = cursor.getString(cursor.getColumnIndex(DatabaseHelper.TBL_col_My_Ip3));
+                String connectedIp = cursor.getString(cursor.getColumnIndex(DatabaseHelper.TBL_col_Connected_Ip3));
+                String message = cursor.getString(cursor.getColumnIndex(DatabaseHelper.TBL_col_Message3));
+                int roll = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.TBL_col_Role3));
 
                 userMessage = new SingleUserMessage(id,myIp,connectedIp,message,roll);
                 singleUserMessages.add(userMessage);

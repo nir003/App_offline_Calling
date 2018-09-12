@@ -52,6 +52,7 @@
         <activity android:name="com.example.nirjhor.offlinecalling.IpTest" />
         <activity android:name="com.example.nirjhor.offlinecalling.Ip_lister" />
         <activity android:name="com.example.nirjhor.offlinecalling.Group_MessageSend" />
+        <activity android:name="com.example.nirjhor.offlinecalling.GroupConnection" />
     </application>
 
 </manifest>

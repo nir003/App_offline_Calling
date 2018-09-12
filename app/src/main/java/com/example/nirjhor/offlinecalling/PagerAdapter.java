@@ -31,14 +31,15 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 Tab2 tab2 = new Tab2();
                 return tab2;
             case 2:
-                Tab3 tab3 = new Tab3();
-                return tab3;
+                Tab5 tab5 = new Tab5();
+                return tab5;
             case 3:
                 Tab4 tab4 = new Tab4();
                 return tab4;
             case 4:
-                Tab5 tab5 = new Tab5();
-                return tab5;
+                Tab3 tab3 = new Tab3();
+                return tab3;
+
             default:
                 return null;
         }

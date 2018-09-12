@@ -6,18 +6,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DB_Name = "Single_User_Message";
-    public static final int DB_version = 1;
+    public static final String DB_Name = "Single_User_Message2";
+    public static final int DB_version = 2;
 
 
 
-    public static final String DB_TableName = "tbl_single_user";
+    public static final String DB_TableName = "tbl_single_user2";
 
     public static final String TBL_col_id = "tbl_id";
     public static final String TBL_col_My_Ip = "tbl_myip";
     public static final String TBL_col_Connected_Ip = "tbl_connectedip";
     public static final String TBL_col_Message = "tbl_message";
     public static final String TBL_col_Role = "tbl_user_role";
+    public static final String TBL_col_group = "tbl_user_group";
 
 
 
@@ -32,6 +33,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TBL_col_Connected_Ip2 = "tbl_connectedip";
     public static final String TBL_col_Message2 = "tbl_message";
     public static final String TBL_col_Role2 = "tbl_user_role";
+
+
+    public static final String DB_TableName3 = "tbl_group_message";
+
+    public static final String TBL_col_id3 = "tbl_id";
+    public static final String TBL_col_My_Ip3 = "tbl_myip";
+    public static final String TBL_col_Connected_Ip3 = "tbl_connectedip";
+    public static final String TBL_col_Message3 = "tbl_message";
+    public static final String TBL_col_Role3 = "tbl_user_role";
 
 
 
@@ -51,6 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             TBL_col_My_Ip+" text, "+
             TBL_col_Message+" text, "+
             TBL_col_Role+" integer, "+
+            TBL_col_group+" text, "+
             TBL_col_Connected_Ip+" text);";
 
 

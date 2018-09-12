@@ -144,7 +144,7 @@ public class Tab1 extends Fragment {
 
 
 
-        myIp =getMyIp();
+            myIp =getMyIp();
 
 
 
@@ -159,6 +159,10 @@ public class Tab1 extends Fragment {
             listView = (ListView) view.findViewById(R.id.listView);
             customAdapter = new Tab1.CustomAdapter(ips);
             listView.setAdapter(customAdapter);
+
+
+        updateList2();
+
         /*    This is my edit Code  */
 
         // Inflate the layout for this fragment
@@ -176,8 +180,14 @@ public class Tab1 extends Fragment {
         /*Code for connect*/
 
         messageHandler = new MessageHandler();
+        //messageHandler.updateList();
+
 
         tv_Others_Ip = view.findViewById(R.id.tv_Others_Ip);
+        String[] baseIp = myIp.split("\\.");
+        String othersIp = baseIp[0]+"."+baseIp[1]+"."+baseIp[2]+".";
+        tv_Others_Ip.setText(othersIp);
+        //Toast.makeText(getContext(), ""+baseIp[0], Toast.LENGTH_SHORT).show();
         btn_connect = view.findViewById(R.id.btn_connect);
 
         tv_socketIp = view.findViewById(R.id.tv_socketIp);
@@ -280,6 +290,7 @@ public class Tab1 extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+
     /*    This is my edit Code  */
     class CustomAdapter extends BaseAdapter {
 
@@ -380,7 +391,7 @@ public class Tab1 extends Fragment {
             this.ip = ipServer;
         }
 
-        Message message = new Message();
+
         @Override
         public void run() {
 
@@ -388,8 +399,7 @@ public class Tab1 extends Fragment {
                 clientSocket = new Socket(ip,8101);
 
 
-
-
+                Message message = new Message();
                 message.what = 2;
                 message.obj = "SocketIp: "+clientSocket.getInetAddress().getHostAddress();
                 messageHandler.sendMessage(message);
@@ -429,10 +439,15 @@ public class Tab1 extends Fragment {
 
                 addMessage(dataArray[0],dataArray[1]);
 
+               // MessageSend.getInstance().updateMessage();
+
 
                 //MessageSend.getInstance().updateMessage();
 
                 //updateList();
+
+               /* MessageSend ms = new MessageSend();
+                ms.updateMessage();*/
             }
 
 
@@ -459,6 +474,23 @@ public class Tab1 extends Fragment {
         }
     }
 
+    public void updateList2(){
+        /*make socket array ip */
+        int lenght = SingleTon_for_socket.getInstance().sockets_connect.size();
+        for (int i=0;i<lenght;i++){
+            sockets_ips[i] = SingleTon_for_socket.getInstance().sockets_connect.get(i).getInetAddress().getHostAddress();
+            Toast.makeText(getContext(), "ip : "+sockets_ips[i], Toast.LENGTH_SHORT).show();
+        }
+
+
+
+        listView = (ListView) view.findViewById(R.id.listView);
+        customAdapter = new Tab1.CustomAdapter(sockets_ips);
+        listView.setAdapter(customAdapter);
+
+
+        /*make socket array ip */
+    }
 
     /*server*/
     class StartServer extends Thread{
@@ -541,7 +573,17 @@ public class Tab1 extends Fragment {
                         //addMessage(data,connected_ip);
                     }
                 } catch (IOException e) {
+
+                    //this.destroy();
+                    try {
+                        dataInputStream.close();
+                        receiveFromclientSocket.close();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
                     e.printStackTrace();
+
                 }
 
             }

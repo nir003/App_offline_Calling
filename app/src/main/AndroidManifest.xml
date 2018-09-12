@@ -40,9 +40,10 @@
         <activity android:name=".CarListActivity" />
         <activity android:name=".MessageListActivity" />
         <activity android:name=".Db_Test2" />
-        <activity android:name=".IpTest"></activity>
-        <activity android:name=".Ip_lister"></activity>
-        <activity android:name=".Group_MessageSend"></activity>
+        <activity android:name=".IpTest" />
+        <activity android:name=".Ip_lister" />
+        <activity android:name=".Group_MessageSend" />
+        <activity android:name=".GroupConnection"></activity>
     </application>
 
 </manifest>

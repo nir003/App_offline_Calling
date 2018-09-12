@@ -5,6 +5,7 @@ public class SingleUserMessage {
     private String myIp;
     private String ConnectedIp;
     private String message;
+    private String isGroup;
     private int userRoll;
 
     public SingleUserMessage(int messageID, String myIp, String connectedIp, String message,int userRoll) {
@@ -15,6 +16,7 @@ public class SingleUserMessage {
         this.userRoll = userRoll;
     }
 
+
     public int getUserRoll() {
         return userRoll;
     }
@@ -24,6 +26,14 @@ public class SingleUserMessage {
         ConnectedIp = connectedIp;
         this.message = message;
         this.userRoll = userRoll;
+
+    }
+    public SingleUserMessage(String myIp, String connectedIp, String message,int userRoll,String isGroup) {
+        this.myIp = myIp;
+        ConnectedIp = connectedIp;
+        this.message = message;
+        this.userRoll = userRoll;
+        this.isGroup = isGroup;
 
     }
 
@@ -41,5 +51,9 @@ public class SingleUserMessage {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getIsGroup() {
+        return isGroup;
     }
 }
